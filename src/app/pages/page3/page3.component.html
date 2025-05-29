@@ -10,7 +10,7 @@
           id="firstName" 
           name="firstName" 
           [(ngModel)]="user.firstName" 
-          (ngModelChange)="updateUser()"
+          (ngModelChange)="onFirstNameChange(); updateUser()"
           required
           #firstName="ngModel">
         <div [hidden]="firstName.valid || firstName.pristine" class="error-message">
@@ -39,8 +39,9 @@
           type="text" 
           id="nickName" 
           name="nickName" 
-          [(ngModel)]="user.nickName"
-          (ngModelChange)="updateUser()">
+          [(ngModel)]="displayNickname"
+          (ngModelChange)="onNicknameChange()"
+          (focus)="onNicknameFocus()">
       </div>
       
       <div class="form-group">
