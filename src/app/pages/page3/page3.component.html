@@ -1,0 +1,65 @@
+<div class="page-container">
+  <h1>Page 3 - Complex Form with JSON Output</h1>
+  
+  <div *ngIf="!submitted" class="form-container">
+    <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+      <div class="form-group">
+        <label for="firstName">First Name</label>
+        <input 
+          type="text" 
+          id="firstName" 
+          name="firstName" 
+          [(ngModel)]="user.firstName" 
+          required
+          #firstName="ngModel">
+        <div [hidden]="firstName.valid || firstName.pristine" class="error-message">
+          First Name is required
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="lastName">Last Name</label>
+        <input 
+          type="text" 
+          id="lastName" 
+          name="lastName" 
+          [(ngModel)]="user.lastName" 
+          required
+          #lastName="ngModel">
+        <div [hidden]="lastName.valid || lastName.pristine" class="error-message">
+          Last Name is required
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="nickName">Nickname</label>
+        <input 
+          type="text" 
+          id="nickName" 
+          name="nickName" 
+          [(ngModel)]="user.nickName">
+      </div>
+      
+      <div class="form-group">
+        <label for="address">Address (optional)</label>
+        <input 
+          type="text" 
+          id="address" 
+          name="address" 
+          [(ngModel)]="user.address">
+      </div>
+      
+      <button type="submit" [disabled]="!userForm.form.valid">Submit</button>
+    </form>
+  </div>
+  
+  <div *ngIf="submitted" class="success-message">
+    <div class="checkmark">✓</div>
+    <p>Form submitted successfully!</p>
+    <div class="json-output">
+      <h3>JSON Output:</h3>
+      <pre>{{ jsonOutput }}</pre>
+    </div>
+    <button (click)="resetForm()">Submit Another</button>
+  </div>
+</div>

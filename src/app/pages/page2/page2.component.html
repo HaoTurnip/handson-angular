@@ -1,0 +1,38 @@
+<div class="page-container">
+  <h1>Page 2 - Two-Way Binding Form</h1>
+  
+  <div *ngIf="!submitted" class="form-container">
+    <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+      <div class="form-group">
+        <label for="name">Name</label>
+        <input 
+          type="text" 
+          id="name" 
+          name="name" 
+          [(ngModel)]="user.name" 
+          required
+          #name="ngModel">
+        <div [hidden]="name.valid || name.pristine" class="error-message">
+          Name is required
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="address">Address</label>
+        <input 
+          type="text" 
+          id="address" 
+          name="address" 
+          [(ngModel)]="user.address">
+      </div>
+      
+      <button type="submit" [disabled]="!userForm.form.valid">Submit</button>
+    </form>
+  </div>
+  
+  <div *ngIf="submitted" class="success-message">
+    <div class="checkmark">✓</div>
+    <p>User <strong>{{ user.name }}</strong> has been submitted.</p>
+    <button (click)="resetForm()">Submit Another</button>
+  </div>
+</div>
