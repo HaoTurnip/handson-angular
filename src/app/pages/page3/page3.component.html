@@ -10,6 +10,7 @@
           id="firstName" 
           name="firstName" 
           [(ngModel)]="user.firstName" 
+          (ngModelChange)="updateUser()"
           required
           #firstName="ngModel">
         <div [hidden]="firstName.valid || firstName.pristine" class="error-message">
@@ -24,6 +25,7 @@
           id="lastName" 
           name="lastName" 
           [(ngModel)]="user.lastName" 
+          (ngModelChange)="updateUser()"
           required
           #lastName="ngModel">
         <div [hidden]="lastName.valid || lastName.pristine" class="error-message">
@@ -37,7 +39,8 @@
           type="text" 
           id="nickName" 
           name="nickName" 
-          [(ngModel)]="user.nickName">
+          [(ngModel)]="user.nickName"
+          (ngModelChange)="updateUser()">
       </div>
       
       <div class="form-group">
@@ -46,7 +49,13 @@
           type="text" 
           id="address" 
           name="address" 
-          [(ngModel)]="user.address">
+          [(ngModel)]="user.address"
+          (ngModelChange)="updateUser()">
+      </div>
+      
+      <div class="preview-section">
+        <h3>Live JSON Preview:</h3>
+        <pre>{{ liveJsonOutput }}</pre>
       </div>
       
       <button type="submit" [disabled]="!userForm.form.valid">Submit</button>

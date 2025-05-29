@@ -26,6 +26,13 @@
           [(ngModel)]="user.address">
       </div>
       
+      <div class="preview-section">
+        <h3>Live Preview:</h3>
+        <p *ngIf="user.name">Hello, <strong>{{ user.name }}</strong>!</p>
+        <p *ngIf="!user.name">Please enter your name</p>
+        <p *ngIf="user.address">Address: {{ user.address }}</p>
+      </div>
+      
       <button type="submit" [disabled]="!userForm.form.valid">Submit</button>
     </form>
   </div>

@@ -1,11 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-page3',
   templateUrl: './page3.component.html',
   styleUrls: ['./page3.component.scss']
 })
-export class Page3Component {
+export class Page3Component implements OnInit {
   user = {
     firstName: '',
     lastName: '',
@@ -13,8 +14,22 @@ export class Page3Component {
     address: null as string | null
   };
   
+  private userSubject = new BehaviorSubject<any>(this.user);
+  userData$ = this.userSubject.asObservable();
+  
   submitted = false;
   jsonOutput = '';
+  liveJsonOutput = '';
+
+  ngOnInit() {
+    this.userData$.subscribe(data => {
+      this.liveJsonOutput = JSON.stringify(data, null, 2);
+    });
+  }
+
+  updateUser() {
+    this.userSubject.next({...this.user});
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -28,6 +43,7 @@ export class Page3Component {
       nickName: '',
       address: null
     };
+    this.updateUser();
     this.submitted = false;
     this.jsonOutput = '';
   }
